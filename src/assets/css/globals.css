@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600;700;900&family=Oxygen:wght@400;700&display=swap");
+:root {
+  --primary-text: "Oxygen", sans-serif;
+  --secondary-text: "Maven Pro", sans-serif;
+  --ucsp-blue-color: #032f53;
+  --ucsp-red-color: #640e1b;
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--secondary-text);
+}
+
+/* ------------LONG TEXT ELLIPSIS------------- */
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
