@@ -41,7 +41,7 @@
     "cypress:open": "cypress open",
     "serve:build": "serve ./build -s -l 9000",
     "test:server": "npm run build && npm run serve:build",
-    "test:dev-server":"run-p --race test:server cypress:open"
+    "test:dev-server": "run-p --race test:server cypress:open"
   },
   "lint-staged": {
     "*.(js|jsx)": [
