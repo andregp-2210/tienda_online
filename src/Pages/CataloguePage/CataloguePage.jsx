@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '@components/ProductCard/ProductCard';
-import { products } from '../../products';
+import products from '../../products';
 
 const CataloguePage = () => {
   return (
