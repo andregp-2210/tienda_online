@@ -25,6 +25,6 @@ jobs:
       - name: Runs local tests
         run: npm test
       - name: Testing cypress
-        run: test:dev-server
+        run: npm run test:dev-server
       - name: Generate build
         run: npm run build
