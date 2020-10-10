@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-} from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText } from 'mdbreact';
 import './index.css';
 
 const ProductCard = ({
@@ -23,10 +16,7 @@ const ProductCard = ({
 }) => (
   <MDBCard data-testid={`product_card-${idProduct}`} className='product_card'>
     {metodoPago && (
-      <p
-        data-testid={`product_card_payment-${idProduct}`}
-        className='product_card_payment'
-      >
+      <p data-testid={`product_card_payment-${idProduct}`} className='product_card_payment'>
         {metodoPago}
       </p>
     )}
@@ -44,17 +34,12 @@ const ProductCard = ({
       waves
     />
     {fechaInicioCurso && (
-      <MDBCardText
-        className='product_card_date'
-      >
+      <MDBCardText className='product_card_date'>
         Fecha de inicio:
         <span data-testid={`product_card_date-${idProduct}`}>{fechaInicioCurso}</span>
       </MDBCardText>
     )}
-    <MDBCardBody
-      data-testid={`product_card_boddy-${idProduct}`}
-      className='product_card_boddy'
-    >
+    <MDBCardBody data-testid={`product_card_boddy-${idProduct}`} className='product_card_boddy'>
       <MDBCardText
         data-testid={`product_card_boddy_description-${idProduct}`}
         className='product_card_boddy_description text-ellipsis'
@@ -63,9 +48,7 @@ const ProductCard = ({
       </MDBCardText>
       <MDBCardText className='product_card_boddy_category'>
         Categoría:
-        <span data-testid={`product_card_boddy_category-${idProduct}`}>
-          {catDescripcion}
-        </span>
+        <span data-testid={`product_card_boddy_category-${idProduct}`}>{catDescripcion}</span>
       </MDBCardText>
       <MDBCardText
         data-testid={`product_card_boddy_price-${idProduct}`}
