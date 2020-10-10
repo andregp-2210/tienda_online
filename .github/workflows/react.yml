@@ -20,11 +20,13 @@ jobs:
           path: |
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
+      - name: Instalación de dependencias
         run: npm install
-      - name: Runs local tests
+      - name: Corrige errores según reglas del Linter
+        run: npm run lint:fix 
+      - name: Corre las pruebas de Jest//Enzyme
         run: npm test
-      - name: Cypress run
+      - name: Corre las pruebas e2e en Cypress
         uses: cypress-io/github-action@v1
         with:
           record: true
@@ -33,4 +35,24 @@ jobs:
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: 29edc3e5-8707-4dab-8b6f-6022afa33dba
-     
+      - name: Despliegue en rama producción
+      uses: zekth/gh-deploy-action@1.0.0
+      with:
+        dir: build
+        gh_token: ${{ secrets.GH_TOKEN }}
+        fqdn: foo.bar.com
+        target_branch: staging
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: GitHub CI
+        SLACK_COLOR: good
+        SLACK_TITLE: 'Estado del Commit :ghost:'
+        SLACK_MESSAGE: El commit pasó todos los tests!
+        SLACK_FOOTER: Hasta el siguiente commit! :3
