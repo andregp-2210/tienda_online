@@ -24,12 +24,7 @@ jobs:
         run: npm install
       - name: Runs local tests
         run: npm test
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Cypress run
+       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
           record: true
@@ -40,3 +35,4 @@ jobs:
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: 29edc3e5-8707-4dab-8b6f-6022afa33dba
+     
