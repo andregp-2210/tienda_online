@@ -3,21 +3,28 @@ on:
   push:
     branches: [master]
 jobs:
-  build:
+  test-and-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm install
       - name: Runs local tests
         run: npm test
-      # - name: Generate build
-      #   run: npm run build
-
+      - name: Testing cypress
+        run: test:dev-server
+      - name: Generate build
+        run: npm run build
