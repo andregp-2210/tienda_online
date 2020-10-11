@@ -57,7 +57,7 @@ jobs:
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#dc3545'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ${{GITHUB_ACTOR}} ${{GITHUB_TOKEN}}' 
+          #SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ${{GITHUB_ACTOR}} ${{GITHUB_TOKEN}}' 
           SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true
       - name: Commit and Push files
