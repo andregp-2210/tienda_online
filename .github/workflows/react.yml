@@ -26,35 +26,37 @@ jobs:
         run: npm run lint:fix 
       - name: Corre las pruebas de Jest//Enzyme
         run: npm test
-      - name: Corre las pruebas e2e en Cypress
-        uses: cypress-io/github-action@v1
-        with:
-          record: true
-          start: npm run test:server
-          wait-on: http://localhost:9000
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: 29edc3e5-8707-4dab-8b6f-6022afa33dba
-      - name: Notificación de Slack cuando sea exitoso
-        if: success()
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: GitHub CI
-          SLACK_COLOR: '#28a745'
-          SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit pasó todos los tests! :tada: $GITHUB_ACTOR $GITHUB_TOKEN'
-          SLACK_FOOTER: Hasta el siguiente commit! :3
-          MSG_MINIMAL: true
+      # - name: Corre las pruebas e2e en Cypress
+      #   uses: cypress-io/github-action@v1
+      #   with:
+      #     record: true
+      #     start: npm run test:server
+      #     wait-on: http://localhost:9000
+      #   env:
+      #     # pass the Dashboard record key as an environment variable
+      #     CYPRESS_RECORD_KEY: 29edc3e5-8707-4dab-8b6f-6022afa33dba
+      # - name: Notificación de Slack cuando sea exitoso
+      #   if: success()
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_USERNAME: GitHub CI
+      #     SLACK_COLOR: '#28a745'
+      #     SLACK_TITLE: 'Estado del Commit :ghost:'
+      #     SLACK_MESSAGE: 'El commit pasó todos los tests! :tada: $GITHUB_ACTOR $GITHUB_TOKEN'
+      #     SLACK_FOOTER: Hasta el siguiente commit! :3
+      #     MSG_MINIMAL: true
       - name: Notificación de Slack cuando sea fallido
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_ACTOR: ${{secrets.GITHUB_ACTOR}}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#dc3545'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ' 
+          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: $GITHUB_ACTOR $GITHUB_TOKEN' 
           SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true
       # - name: Subir el build a rama main
