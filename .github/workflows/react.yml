@@ -43,7 +43,7 @@ jobs:
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#28a745'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit pasó todos los tests! :gorro_de_fiesta:'
+          SLACK_MESSAGE: 'El commit pasó todos los tests! :tada: '
           SLACK_FOOTER: Hasta el siguiente commit! :3
           MSG_MINIMAL: true
       - name: Notificación de Slack cuando sea fallido
@@ -54,6 +54,6 @@ jobs:
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#dc3545'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit no pasó los tests! :sollozo:'
+          SLACK_MESSAGE: 'El commit no pasó los tests! :sob: ' 
           SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true

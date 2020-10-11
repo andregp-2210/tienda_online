@@ -17,7 +17,7 @@ describe('Testing <ProductCard />', () => {
     expect(productCard.find(`[data-testid='product_card_date-${productBase.idProduct}']`).children()).toHaveLength(0);
     expect(productCard.find(`[data-testid='product_card_boddy_description-${productBase.idProduct}']`).children().text()).toEqual('Guía de Práctica');
     expect(productCard.find(`[data-testid='product_card_boddy_category-${productBase.idProduct}']`).text()).toEqual('LIBRO');
-    expect(productCard.find(`[data-testid='product_card_boddy_price-${productBase.idProduct}']`).children().text()).toEqual('Gratuitox');
+    expect(productCard.find(`[data-testid='product_card_boddy_price-${productBase.idProduct}']`).children().text()).toEqual('Gratuito');
     expect(productCard.find(`[data-testid='product_card_button-${productBase.idProduct}']`).children().text()).toEqual('Descargar');
   })
   test('should render paymentMethod', () => {
