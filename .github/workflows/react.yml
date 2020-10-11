@@ -35,14 +35,19 @@ jobs:
       #   env:
       #     # pass the Dashboard record key as an environment variable
       #     CYPRESS_RECORD_KEY: 29edc3e5-8707-4dab-8b6f-6022afa33dba
-      - name: Commit and Push files
+      - name: Commit files
         run: |
           npm run build
           git config --local user.email "test@github.com"
           git config --local user.name "GitHub Action test"
           git add build
           git commit -m "feat: Agrega nuevo build"
-          git push origin main
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main #ignore if your branch is master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
       - name: Notificación de Slack cuando sea exitoso
         if: success()
         uses: rtCamp/action-slack-notify@master
@@ -62,12 +67,6 @@ jobs:
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#dc3545'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished:'
+          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ${GITHUB_ACTOR}'
           SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true
-      # - name: Push changes # push the output folder to your repo
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     branch: main #ignore if your branch is master
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     force: true
