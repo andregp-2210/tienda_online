@@ -55,5 +55,5 @@ jobs:
           SLACK_COLOR: '#dc3545'
           SLACK_TITLE: 'Estado del Commit :ghost:'
           SLACK_MESSAGE: 'El commit no pasó los tests! :sollozo:'
-          SLACK_FOOTER: Hasta el siguiente commit! :3
+          SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true
