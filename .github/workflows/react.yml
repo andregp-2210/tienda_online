@@ -60,16 +60,17 @@ jobs:
           SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: $GITHUB_ACTOR $GITHUB_TOKEN' 
           SLACK_FOOTER: Hasta el siguiente commit! u.u
           MSG_MINIMAL: true
-      - name: Commit files # commit the output folder
+      - name: Commit and Push files
         run: |
           npm run build
           git config --local user.email "test@github.com"
           git config --local user.name "GitHub Action test"
-          git add ./build
-          git commit -m "Add changes"
-      - name: Push changes # push the output folder to your repo
-        uses: ad-m/github-push-action@master
-        with:
-          branch: B77 #ignore if your branch is master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+          git add /build
+          git commit -m "feat: Agrega nuevo build"
+          git push origin main
+      # - name: Push changes # push the output folder to your repo
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     branch: main #ignore if your branch is master
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     force: true
