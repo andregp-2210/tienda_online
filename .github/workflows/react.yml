@@ -8,9 +8,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-    env:
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      GITHUB_ACTOR: ${{secrets.GITHUB_ACTOR}}
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -42,11 +39,14 @@ jobs:
         if: success()
         uses: rtCamp/action-slack-notify@master
         env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_ACTOR: ${{secrets.GITHUB_ACTOR}}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: GitHub CI
           SLACK_COLOR: '#28a745'
           SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: El commit pasó todos los tests! ${{GITHUB_ACTOR}} ${{GITHUB_TOKEN}}
+          SLACK_MESSAGE: El commit pasó todos los tests! $GITHUB_CONTEXT $GITHUB_ACTOR $GITHUB_TOKEN 
           SLACK_FOOTER: Hasta el siguiente commit! :3
           MSG_MINIMAL: true
       - name: Notificación de Slack cuando sea fallido
