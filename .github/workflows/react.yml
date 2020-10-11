@@ -41,9 +41,10 @@ jobs:
           git config --local user.email "github-action@users.noreply.github.asd"
           git config --local user.name "GitHub Action test"
           git config --local user.password ${{ secrets.GITHUB_TOKEN }}
+          git config --global push.default main
           git add build
           git commit -m "feat: Agrega nuevo build"
-          git push origin main
+          git push
       # - name: Push changes # push the output folder to your repo
       #   uses: ad-m/github-push-action@master
       #   with:
