@@ -14,12 +14,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      # - name: Cache dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       **/node_modules
+      #     key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       # - name: Instalación de dependencias
       #   run: npm install
       # - name: Corrige errores según reglas del Linter
@@ -43,32 +43,32 @@ jobs:
           git config --local user.password ${{ secrets.GITHUB_TOKEN }}
           git add build
           git commit -m "feat: Agrega nuevo build"
-          git remote add https://github.com/andregp-2210/tienda_online.git
+          git remote add origin https://github.com/andregp-2210/tienda_online.git
           git push origin main
       # - name: Push changes # push the output folder to your repo
       #   uses: ad-m/github-push-action@master
       #   with:
       #     branch: main #ignore if your branch is master
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Notificación de Slack cuando sea exitoso
-        if: success()
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: GitHub CI
-          SLACK_COLOR: '#28a745'
-          SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: El commit pasó todos los tests!
-          SLACK_FOOTER: Hasta el siguiente commit! :3
-          MSG_MINIMAL: true
-      - name: Notificación de Slack cuando sea fallido
-        if: failure()
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: GitHub CI
-          SLACK_COLOR: '#dc3545'
-          SLACK_TITLE: 'Estado del Commit :ghost:'
-          SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ${GITHUB_ACTOR}'
-          SLACK_FOOTER: Hasta el siguiente commit! u.u
-          MSG_MINIMAL: true
+      # - name: Notificación de Slack cuando sea exitoso
+      #   if: success()
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_USERNAME: GitHub CI
+      #     SLACK_COLOR: '#28a745'
+      #     SLACK_TITLE: 'Estado del Commit :ghost:'
+      #     SLACK_MESSAGE: El commit pasó todos los tests!
+      #     SLACK_FOOTER: Hasta el siguiente commit! :3
+      #     MSG_MINIMAL: true
+      # - name: Notificación de Slack cuando sea fallido
+      #   if: failure()
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_USERNAME: GitHub CI
+      #     SLACK_COLOR: '#dc3545'
+      #     SLACK_TITLE: 'Estado del Commit :ghost:'
+      #     SLACK_MESSAGE: 'El commit no pasó los tests! :astonished: ${GITHUB_ACTOR}'
+      #     SLACK_FOOTER: Hasta el siguiente commit! u.u
+      #     MSG_MINIMAL: true
