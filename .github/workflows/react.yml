@@ -20,12 +20,12 @@ jobs:
           path: |
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Instalación de dependencias
-        run: npm install
-      - name: Corrige errores según reglas del Linter
-        run: npm run lint:fix 
-      - name: Corre las pruebas de Jest//Enzyme
-        run: npm test
+      # - name: Instalación de dependencias
+      #   run: npm install
+      # - name: Corrige errores según reglas del Linter
+      #   run: npm run lint:fix 
+      # - name: Corre las pruebas de Jest//Enzyme
+      #   run: npm test
       # - name: Corre las pruebas e2e en Cypress
       #   uses: cypress-io/github-action@v1
       #   with:
@@ -38,16 +38,18 @@ jobs:
       - name: Commit files
         run: |
           npm run build
-          git config --local user.email "test@github.com"
+          git config --local user.email "github-action@users.noreply.github.asd"
           git config --local user.name "GitHub Action test"
+          git config --local user.password ${{ secrets.GITHUB_TOKEN }}
           git add build
           git commit -m "feat: Agrega nuevo build"
-      - name: Push changes # push the output folder to your repo
-        uses: ad-m/github-push-action@master
-        with:
-          branch: main #ignore if your branch is master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+          git remote add https://github.com/andregp-2210/tienda_online.git
+          git push origin main
+      # - name: Push changes # push the output folder to your repo
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     branch: main #ignore if your branch is master
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Notificación de Slack cuando sea exitoso
         if: success()
         uses: rtCamp/action-slack-notify@master
